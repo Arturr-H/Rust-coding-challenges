@@ -114,3 +114,43 @@ pub fn three_sum(input:&Vec<i32>) -> Vec<(i32, i32, i32)> {
 
     fin
 }
+
+/*- Minesweeper Grid
+    Create a function that takes a grid of # and -, where each hash (#) represents a mine and each
+    dash (-) represents a mine-free spot. Return an array where each dash is replaced by a digit indicating
+    the number of mines immediately adjacent to the spot (horizontally, vertically, and diagonally). -*/
+pub fn minesweeper_grid<'a>(input:Vec<Vec<&'a str>>) -> Vec<Vec<i32>> {
+    let mut end:Vec<Vec<i32>> = Vec::new();
+    for (y, row) in input.iter().enumerate() {
+        end.push(vec![0; row.len()]);
+        for (x, tile) in row.iter().enumerate() {
+            let bombs:u32 = get_bomb_neighbours(&input, x as isize, y as isize);
+
+            if tile == &"#" {
+                end[y][x] = -1;
+            }else {
+                end[y][x] = bombs as i32;
+            };
+        };
+    };
+
+    end
+}
+fn get_bomb_neighbours<'a>(input:&'a Vec<Vec<&'a str>>, x:isize, y:isize) -> u32 {
+    let mut end:u32 = 0u32;
+    for _y in y-1..y+2 {
+        for _x in x-1..x+2 {
+            if _y < 0 || _x < 0 { continue; };
+            if _y as usize >= input.len() || _x as usize >= input[_y as usize].len() { continue; };
+            if _y == y && _x == x { continue; };
+
+            println!("{_x} {_y}");
+
+            if input[_y as usize][_x as usize] == "#" {
+                end += 1;
+            };
+        };
+    };
+
+    end
+}

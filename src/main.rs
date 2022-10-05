@@ -17,4 +17,11 @@ fn main() -> () {
     println!("{:?}", zeroes);
     println!("{:?}", challenges::two_powers_of_two(2048));
     println!("{:?}", challenges::three_sum(&vec![1, 2, 34, 5, 7, 8, 1, -1, 0]));
+    println!("{:?}", challenges::minesweeper_grid(vec![
+        vec!["-", "-", "-", "-", "-"],
+        vec!["-", "-", "-", "#", "-"],
+        vec!["-", "-", "#", "-", "-"],
+        vec!["-", "-", "-", "-", "-"],
+        vec!["-", "-", "-", "-", "-"],
+    ]));
 }
