@@ -1,3 +1,5 @@
+use std::{ boxed::Box, fmt::Debug };
+
 /*- How much is true?
     ----- Create a function which returns the number of true values there are in an array. -*/
 pub fn how_much_is_true(input:Vec<bool>) -> usize {
@@ -144,8 +146,6 @@ fn get_bomb_neighbours<'a>(input:&'a Vec<Vec<&'a str>>, x:isize, y:isize) -> u32
             if _y as usize >= input.len() || _x as usize >= input[_y as usize].len() { continue; };
             if _y == y && _x == x { continue; };
 
-            println!("{_x} {_y}");
-
             if input[_y as usize][_x as usize] == "#" {
                 end += 1;
             };
@@ -153,4 +153,47 @@ fn get_bomb_neighbours<'a>(input:&'a Vec<Vec<&'a str>>, x:isize, y:isize) -> u32
     };
 
     end
+}
+
+/*- Binary tree search -*/
+pub const MAX_TREE_DEPTH:u32 = 5u32;
+pub const ARM_GEN_PROBABILITY:f64 = 0.9f64;
+
+/*- Structs, enums & unions -*/
+#[derive(Debug)]
+pub struct Node {
+    left:  Option<Box<Node>>,
+    right: Option<Box<Node>>,
+    value: i32
+}
+
+/*- Method implementations -*/
+impl Node {
+
+    /*- Constructor -*/
+    pub fn new(left:Option<Box<Node>>, right:Option<Box<Node>>, value:i32) -> Node {
+        Node { left, right, value }
+    }
+
+    /*- Binary tree search -*/
+    pub fn search(node:&Box<Self>, search_value:i32) -> Option<i32> {
+
+        /*- If number is found -*/
+        if node.value == search_value {
+            return Some(node.value);
+        };
+
+        /*- Recursivly try to find value -*/
+        match &node.left {
+            Some(left) => return Node::search(left, search_value),
+            None => ()
+        };
+        match &node.right {
+            Some(right) => return Node::search(right, search_value),
+            None => ()
+        };
+
+        /*- Return -*/
+        None
+    }
 }

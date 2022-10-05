@@ -5,6 +5,8 @@
 
 /*- Imports -*/
 mod challenges;
+use challenges::{ Node, ARM_GEN_PROBABILITY, MAX_TREE_DEPTH };
+use rand::Rng;
 
 /*- Initialize -*/
 fn main() -> () {
@@ -24,4 +26,27 @@ fn main() -> () {
         vec!["-", "-", "-", "-", "-"],
         vec!["-", "-", "-", "-", "-"],
     ]));
+    /*- Create some branches -*/
+    let node = Node::new(generate_node(ARM_GEN_PROBABILITY, 0), generate_node(ARM_GEN_PROBABILITY, 0), 0);
+
+    /*- Find item -*/
+    let search = Node::search(&Box::new(node), 2);
+    match search {
+        Some(value) => println!("FOUND {:?}", value),
+        None => println!("Not found"),
+    };
+}
+
+pub fn generate_node(probability:f64, index:u32) -> Option<Box<Node>> {
+    if index > MAX_TREE_DEPTH { return None };
+
+    /*- Create nodes -*/
+    let rand_bool = rand::thread_rng().gen_bool(probability);
+    if rand_bool {
+        Some(Box::new(Node::new(
+            generate_node(probability, index+1),
+            generate_node(probability, index+1),
+            rand::thread_rng().gen_range(-5..5)
+        )))
+    } else { None }
 }
