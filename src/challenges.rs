@@ -197,3 +197,37 @@ impl Node {
         None
     }
 }
+
+/*- Delete the Middle Node of a Linked List
+    You are given the head of a linked list. Delete the middle node, and return the head of the
+    modified linked list. The middle node of a linked list of size n is the ⌊n / 2⌋th node from
+    the start using 0-based indexing, where ⌊x⌋ denotes the largest integer less than or equal to x.-*/
+#[derive(Debug, Clone)]
+pub struct LLNode {
+    next:Option<Box<LLNode>>,
+    inner:i32,
+}
+pub fn find_middle(list:LLNode) -> () {
+    let (node, index) = iter_nodes(Box::new(list), 0);
+    println!("{}", index/2);
+    println!("{} {:?}", index, node);
+}
+fn iter_nodes(node:Box<LLNode>, index:usize) -> (Box<LLNode>, usize) {
+    match node.next {
+        Some(e) => {
+            let iter = iter_nodes(e, index+1);
+            if iter.1 == index/2 {
+                return (Box::new(LLNode::new(0, None)), index)
+            }else { (iter.0,iter.1) } 
+        },
+        None => (node, index)
+    }
+}
+impl LLNode {
+    pub fn new(inner:i32, next:Option<LLNode>) -> LLNode {
+        LLNode { next: match next {
+            Some(e) => Some(Box::new(e)),
+            None => None
+        }, inner }
+    }
+}
