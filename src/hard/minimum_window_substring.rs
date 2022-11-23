@@ -2,7 +2,7 @@
 /// Given two strings s and t of lengths m and n respectively, return the minimum
 /// window substring of s such that every character in t (including duplicates)
 /// is included in the window. If there is no such substring, return the empty string "".
-pub fn run(s: &str, t:&str) -> () {
+pub fn run(s: &str, t:&str) -> (String, usize) {
     let mut end = Vec::new();
     for (index, _char) in s.chars().enumerate() {
         if t.contains(_char) {
@@ -27,7 +27,8 @@ pub fn run(s: &str, t:&str) -> () {
             final_ = (chars, max - min)
         }
     }
-    println!("{final_:?}");
+    
+    final_
 }
 fn run_inner<'a>(s:&'a str, depth:usize, t:&str, curr:Vec<(char, usize)>) -> Option<Vec<Vec<(char, usize)>>> {
     if depth <= 0 { return None };

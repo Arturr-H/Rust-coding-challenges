@@ -1,6 +1,6 @@
 /// Given n non-negative integers representing an elevation map where the
 /// width of each bar is 1, compute how much water it can trap after raining.
-pub fn run<'a>(height:&'a [u32]) -> () {
+pub fn run<'a>(height:&'a [u32]) -> u32 {
     let max_bar = *height.iter().max().unwrap();
     let heightmap_len = height.len();
     let mut total:u32 = 0;
@@ -23,7 +23,7 @@ pub fn run<'a>(height:&'a [u32]) -> () {
         }
     }
 
-    println!("{total}");
+    total
 }
 fn check(height: &[u32], x:usize, y:usize, max:u32) -> bool {
     /*- Check <- -*/
