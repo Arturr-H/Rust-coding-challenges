@@ -24,6 +24,9 @@ mod trapping_rain_water;
 #[path = "./medium/number_of_islands.rs"]
 mod number_of_islands;
 
+#[path = "./hard/integer_to_english_words.rs"]
+mod integer_to_english_words;
+
 /*- Initialize -*/
 fn main() -> () {
     dotenv::dotenv().unwrap();
@@ -33,6 +36,7 @@ fn main() -> () {
     run(median_of_two_sorted_arrays ::run(&[1, 2], &[3]));
     run(trapping_rain_water         ::run(&[4,2,0,3,2,5]));
     run(number_of_islands           ::run(vec![vec![1, 1, 0, 0, 0], vec![1, 1, 0, 0, 0], vec![0, 0, 1, 0, 0], vec![0, 0, 0, 1, 1]]));
+    run(integer_to_english_words    ::run(2935));
     // run(day1                        ::run());
     // run(day1                        ::run_2());
 
