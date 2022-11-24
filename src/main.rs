@@ -21,23 +21,20 @@ mod median_of_two_sorted_arrays;
 #[path = "./hard/trapping_rain_water.rs"]
 mod trapping_rain_water;
 
-#[path = "./AOC-2022/input_getter.rs"]
-mod input_getter;
-
-/*- Challenges AOC-2022 -*/
-#[path = "./AOC-2022/day1/challenge.rs"]
-mod day1;
+#[path = "./medium/number_of_islands.rs"]
+mod number_of_islands;
 
 /*- Initialize -*/
 fn main() -> () {
     dotenv::dotenv().unwrap();
-
     // input_getter::get_input(1);
+
     run(min_window_substring        ::run("pafbaidawajiddonaoie", "def"));
     run(median_of_two_sorted_arrays ::run(&[1, 2], &[3]));
     run(trapping_rain_water         ::run(&[4,2,0,3,2,5]));
-    run(day1                        ::run());
-    run(day1                        ::run_2());
+    run(number_of_islands           ::run(vec![vec![1, 1, 0, 0, 0], vec![1, 1, 0, 0, 0], vec![0, 0, 1, 0, 0], vec![0, 0, 0, 1, 1]]));
+    // run(day1                        ::run());
+    // run(day1                        ::run_2());
 
     /*- Time function call -*/
     // let start = std::time::Instant::now();
