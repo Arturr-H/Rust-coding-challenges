@@ -27,6 +27,9 @@ mod number_of_islands;
 #[path = "./hard/integer_to_english_words.rs"]
 mod integer_to_english_words;
 
+#[path = "./hard/self_crossing.rs"]
+mod self_crossing;
+
 /*- Initialize -*/
 fn main() -> () {
     dotenv::dotenv().unwrap();
@@ -37,6 +40,7 @@ fn main() -> () {
     run(trapping_rain_water         ::run(&[4,2,0,3,2,5]));
     run(number_of_islands           ::run(vec![vec![1, 1, 0, 0, 0], vec![1, 1, 0, 0, 0], vec![0, 0, 1, 0, 0], vec![0, 0, 0, 1, 1]]));
     run(integer_to_english_words    ::run(2935));
+    run(self_crossing               ::run(&[2,1,1,2]));
     // run(day1                        ::run());
     // run(day1                        ::run_2());
 
