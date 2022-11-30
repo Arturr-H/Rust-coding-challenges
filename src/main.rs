@@ -9,7 +9,7 @@ use std::fmt::Debug;
 use dotenv;
 
 /*- Constants -*/
-const BENCHMARK_ITERATIONS: usize = 1000;
+const BENCHMARK_ITERATIONS: usize = 1000000;
 
 /*- Imports -*/
 #[path = "./hard/minimum_window_substring.rs"]
@@ -30,6 +30,9 @@ mod integer_to_english_words;
 #[path = "./hard/self_crossing.rs"]
 mod self_crossing;
 
+#[path = "./arrays/get_sum.rs"]
+mod get_sum;
+
 /*- Initialize -*/
 fn main() -> () {
     dotenv::dotenv().unwrap();
@@ -41,14 +44,18 @@ fn main() -> () {
     run(number_of_islands           ::run(vec![vec![1, 1, 0, 0, 0], vec![1, 1, 0, 0, 0], vec![0, 0, 1, 0, 0], vec![0, 0, 0, 1, 1]]));
     run(integer_to_english_words    ::run(2935));
     run(self_crossing               ::run(&[2,1,1,2]));
+    run(get_sum                     ::run::nested(&[2,2,1,1], 4));
+    run(get_sum                     ::run::backchecked(&[2,2,1,1], 4));
 
     /*- Time function call -*/
     let start = std::time::Instant::now();
 
     /*- Move any function which we want to time here -*/
     for _ in 0..BENCHMARK_ITERATIONS {
-        trapping_rain_water::run(&[4,2,0,3,2,5]);
+        get_sum                     ::run::backchecked(&[2,2,1,1,5,8,3,1,4,7,434,1232,4,42,134,56,75,453423,23243,12], 490);
     };
+    // nested: 0.000004373027s,
+
 
     println!("Average time after {BENCHMARK_ITERATIONS} calls: {}s", std::time::Instant::now().duration_since(start).as_secs_f32() / BENCHMARK_ITERATIONS as f32);
 }
